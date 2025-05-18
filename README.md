@@ -2,7 +2,7 @@
 
 A terminal-based user interface (TUI) for managing AWS ECS Fargate resources, inspired by the classic `iptraf` interface style. This tool provides an intuitive, interactive dashboard for ECS cluster, service, and task management directly from your terminal.
 
-![AWS ECS TUI Main Screen](https://raw.githubusercontent.com/KamranBiglari/aws-ecs-tui/main/screenshots/main-screen.png)
+![AWS ECS TUI Main Screen](https://raw.githubusercontent.com/KamranBiglari/aws-ecs-tui/main/screenshots/aws-ecs-tui.gif)
 
 ## Description
 
@@ -63,12 +63,12 @@ The script automatically handles dependencies, making it easy to deploy and use 
 
 ### Service Management
 ![Service Management](https://raw.githubusercontent.com/KamranBiglari/aws-ecs-tui/main/screenshots/service-management.png)
+![Service Details](https://raw.githubusercontent.com/KamranBiglari/aws-ecs-tui/main/screenshots/service-details.png)
 
 ### Task Management
 ![Task Management](https://raw.githubusercontent.com/KamranBiglari/aws-ecs-tui/main/screenshots/task-management.png)
-
-### Execute Command
-![Execute Command](https://raw.githubusercontent.com/KamranBiglari/aws-ecs-tui/main/screenshots/execute-command.png)
+![Task Details](https://raw.githubusercontent.com/KamranBiglari/aws-ecs-tui/main/screenshots/task-details.png)
+![Task Container](https://raw.githubusercontent.com/KamranBiglari/aws-ecs-tui/main/screenshots/task-container.png)
 
 ## Requirements
 
@@ -182,7 +182,3 @@ This project is licensed under the MIT License - see the LICENSE file for detail
 - Inspired by the classic `iptraf` interface
 - Built using `dialog`, AWS CLI, and `jq`
 - Thanks to the AWS ECS team for providing the APIs that make this tool possible
-
----
-
-**Note**: Replace placeholder image URLs with actual screenshots once you've created them. You'll need to create the screenshots directory in your repository and add your screenshots there.
