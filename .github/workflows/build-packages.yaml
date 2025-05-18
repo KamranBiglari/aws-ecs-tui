@@ -1,0 +1,50 @@
+name: Build Packages
+
+on:
+  push:
+    tags:
+      - 'v*'
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      
+      - name: Set up environment
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y build-essential debhelper devscripts rpm
+
+      - name: Build DEB package
+        run: |
+          mkdir -p aws-ecs-tui/DEBIAN
+          mkdir -p aws-ecs-tui/usr/bin
+          mkdir -p aws-ecs-tui/usr/share/doc/aws-ecs-tui
+          # Create control file
+          cat > aws-ecs-tui/DEBIAN/control << EOF
+          Package: aws-ecs-tui
+          Version: ${GITHUB_REF_NAME#v}
+          Section: utils
+          Priority: optional
+          Architecture: all
+          Depends: bash (>= 4.0), dialog, jq, awscli
+          Maintainer: Kamran Biglari <kamran@kamranonline.uk>
+          Description: Terminal UI for AWS ECS Fargate
+           A terminal-based user interface (TUI) for managing AWS ECS Fargate resources.
+          EOF
+          # Copy files
+          cp aws-ecs-tui.sh aws-ecs-tui/usr/bin/aws-ecs-tui
+          chmod 755 aws-ecs-tui/usr/bin/aws-ecs-tui
+          cp README.md aws-ecs-tui/usr/share/doc/aws-ecs-tui/
+          # Build package
+          dpkg-deb --build aws-ecs-tui
+          mv aws-ecs-tui.deb aws-ecs-tui_${GITHUB_REF_NAME#v}_all.deb
+
+      - name: Upload packages to release
+        uses: softprops/action-gh-release@v1
+        with:
+          files: |
+            aws-ecs-tui_*.deb
+        env:
+          GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
